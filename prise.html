@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>PayPay Shop</title>
+  <!-- Polices modernes -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary:#0077ff;
+      --secondary:#25D366;
+      --dark:#353339;
+      --light:#e6e4ec;
+    }
+
+    * { box-sizing:border-box; }
+    body {
+      font-family:'Poppins',sans-serif;
+      margin:0; padding:0;
+      background:var(--light); color:#090909b1;
+    }
+    header {
+      position:fixed; top:0; left:0; right:0;
+      background:var(--dark); color:#fff;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:10px 20px; z-index:1000;
+      box-shadow:0 2px 5px rgba(17, 34, 218, 0.388);
+    }
+    header h1 { margin:0; font-size:24px; font-weight:600; }
+    header img { height:40px; margin-left:10px; }
+    .cart-icon {
+      font-size:28px; cursor:pointer;
+      transition:transform 0.3s;
+      animation:bounce 0.6s infinite alternate;
+    }
+    header select {
+      padding:5px 10px;
+      border-radius:5px;
+      border:none;
+      font-family:'Poppins',sans-serif;
+      font-size:14px;
+      cursor:pointer;
+    }
+    header select:hover {
+      background:var(--primary);
+      color:#fff;
+    }
+
+    .cart-icon:hover { transform:scale(1.2); }
+    @keyframes bounce { from{transform:translateY(0);} to{transform:translateY(-5px);} }
+    #cartCount {
+    position:absolute; top:-8px; right:-10px;
+    background:red; color:#fff;
+    font-size:14px; font-weight:bold;
+    border-radius:50%; padding:2px 6px;
+    animation:pop 0.3s ease;
+  }
+  @keyframes pop { from{transform:scale(0.5);} to{transform:scale(1);} }
+
+    .search-bar {
+      margin:100px auto 20px; text-align:center;
+    }
+
+    .search-toggle {
+      font-size:24px; cursor:pointer;
+      color:#fff;
+      animation:bounce 0.6s infinite alternate;
+    }
+    .search-toggle:hover {
+      transform:scale(1.2); color:var(--primary);
+    }
+
+    .search-bar input {
+      width:70%; max-width:500px;
+      padding:12px; font-size:16px;
+      border:2px solid var(--primary); border-radius:30px;
+      outline:none; transition:0.3s;
+    }
+    .search-bar input:focus { border-color:var(--secondary); }
+
+    .products {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:25px; padding:20px;
+    }
+    .product {
+      background:#b6aeae; border-radius:12px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+      padding:15px; text-align:center;
+      opacity:0; transform:translateY(20px);
+      transition:all 0.8s ease;
+    }
+    .product.visible { opacity:1; transform:translateY(0); }
+    .product img { width:60%; height:180px; object-fit:cover; border-radius:20px; }
+    .product h3 { margin:10px 0 5px; font-weight:600; }
+    .product p { margin:5px 0; }
+    .btn {
+      display:inline-block; margin:5px; padding:10px 16px;
+      border:none; border-radius:30px; cursor:pointer;
+      color:#fff; font-weight:600; font-size:14px;
+      transition:0.3s; animation:pulse 1s infinite;
+    }
+    .btn-cart { background:var(--primary); }
+    .btn-whatsapp { background:var(--secondary); }
+    .btn:hover { transform:scale(1.05); opacity:0.9; }
+    @keyframes pulse { 0%{transform:scale(1);} 50%{transform:scale(1.08);} 100%{transform:scale(1);} }
+
+    footer {
+      background:var(--dark); color:#fff; text-align:center;
+      padding:15px; position:fixed; bottom:0; left:0; right:0;
+      display:flex; justify-content:center; gap:20px;
+    }
+    footer a {
+      color:#fff; font-size:22px; text-decoration:none;
+      transition:0.3s; animation:bounce 0.6s infinite alternate;
+    }
+    footer a:hover { color:var(--primary); transform:scale(1.2); }
+
+    /* Ton style existant reste inchangé au-dessus */
+
+/* ✅ Adaptation mobile */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 18px;
+  }
+  header img {
+    height: 30px;
+  }
+  .cart-icon {
+    font-size: 22px;
+  }
+  header select {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  .search-bar input {
+    width: 90%;   /* occupe presque toute la largeur */
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .products {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+    padding: 10px;
+  }
+  .product {
+    padding: 10px;
+  }
+  .product img {
+    width: 100%;   /* image pleine largeur */
+    height: auto;  /* hauteur automatique */
+    max-height: 180px;
+  }
+  .product h3 {
+    font-size: 14px;
+  }
+  .product p {
+    font-size: 12px;
+  }
+  .btn {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .products {
+    grid-template-columns: 1fr; /* une seule colonne sur très petit écran */
+  }
+  .product img {
+    max-height: 150px;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+<header>
+  <div style="display:flex; align-items:center;">
+    <h1>PayPay</h1>
+    <img src="images/logo_vente.png" alt="Logo">
+  </div>
+  <div style="display:flex; align-items:center; gap:20px;"> 
+    <div class="search-toggle" onclick="toggleSearch()"><i class="fas fa-search"></i>
+    </div>
+    <!-- Sélecteur de langue --> 
+     <select onchange="setLanguage(this.value)"> 
+      <option value="fr">Français</option> 
+      <option value="en">English</option> 
+      <option value="ew">Eʋegbe</option> 
+    </select>
+
+    <div class="cart-icon" onclick="sendCart()"><i class="fas fa-shopping-cart"></i>
+      <span id="cartCount">0</span>
+    </div>
+  </div>
+</header>
+
+<div class="search-bar" id="searchBar" style="display:none;">
+  <input type="text" id="searchInput" placeholder="Chercher un produit..." onkeyup="searchProduct()">
+</div>
+
+<div class="products" id="productList"></div>
+
+<footer>
+  <a href="https://wa.me/22891962246" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <a href="mailto:sol.infotech10@gmail.com"><i class="fas fa-envelope"></i></a>
+  <a href="https://www.facebook.com/marketplace/item/791895487276760/" target="_blank"><i class="fab fa-facebook"></i></a>
+  <a href="tiktok.com/@freenet.technolog" target="_blank"><i class="fab fa-tiktok"></i></a>
+  <a href="#" onclick="sendCart()"><i class="fas fa-shopping-cart"></i></a>
+</footer>
+
+<script src="i18n.js"></script>
+<script>
+ 
+  const products = [
+    {name:"faut plat", price:"200 FCFA", comment:" faut plat Super qualité", img:"images/assiete.jpg"},
+    {name:"CHISE PLASTIQUE", price:"2.500 FCFA", comment:"Très demandé", img:"images/chese1.jpg"},
+    {name:"FRIGIDAIRE DE GLACE", price:"60.000 FCFA", comment:"Nouveau", img:"images/frigidair.jpg"},
+    {name:"SOURIS SANS FILE", price:"1.500 FCFA", comment:"Promo spéciale", img:"images/sourisss.jpg"},
+    {name:"MONTER EN OR", price:"3.000 FCFA", comment:"montre en or trés attirant", img:"images/monmontre.jpg"},
+    {name:"HAUT PARLEUR PUBLICITAIRE", price:"12.000 FCFA", comment:"Édition limitée", img:"images/hoparleur.jpg"},
+    {name:"FRIGIDAIRE", price:"66.000 FCFA", comment:"Populaire", img:"images/frigidair&.jpg"},
+    {name:"TABLETTE", price:"20.000 FCFA", comment:"tablette enfant", img:"images/tablette.jpg"},
+    {name:"BATERIE ARTISTE", price:"100.000 FCFA", comment:"bateririe moderne aves base éclairante", img:"images/bateri.jpg"},
+    {name:"CHAISE", price:"2.000 FCFA", comment:"chaise plastique et sollide", img:"images/chese22.jpg"},
+    {name:"TENIS DE SPORT", price:"7.000 FCFA", comment:"tenis fermer pour la jeunesse", img:"images/chaussur.jpg"},
+    {name:"ORDINATEUR", price:"110.000 FCFA", comment:"pc de haut niveaux version avancé", img:"images/ordinateur.jpg"},
+    {name:"VENTILATEUR", price:"10.000 FCFA", comment:"ventilateur Super qualité", img:"images/ventilateur.jpg"},
+    {name:"BRASSEUR", price:"20.000 FCFA", comment:"brasseur Super qualité plafoner", img:"images/ventilateur_plafon.jpg"},
+    {name:"HAOJUE", price:"560.000 FCFA", comment:"haojue dame nouveau", img:"images/moto22.jpg"},
+    {name:"GITAR", price:"55.000 FCFA", comment:"gitar moderne le song moderne et éclatant", img:"images/gitar.jpg"},
+    {name:"FRIGIDAIRE DU SALON", price:"90.000 FCFA", comment:"frigidaire du salon bien décoré", img:"images/friji.jpg"},
+    {name:"CASQUE BLUETOOTH", price:"2.200 FCFA", comment:"casque bluetooth", img:"images/casque_audi.jpg"},
+    {name:"TSHIRT HOMME", price:"1.500 FCFA", comment:"tshirt de bonne qualiter", img:"images/habi_hom.jpg"},
+    {name:"TSHIRT HOMME", price:"1.500 FCFA", comment:"tshirt de bonne qualiter et couleur", img:"images/habi_hom2.jpg"}
+  ];
+
+  let cart = [];
+  let cartCount = 0;
+
+  function renderProducts(list, lang="fr"){
+    const container = document.getElementById("productList");
+    container.innerHTML="";
+    translations[lang].products.slice(0,20).forEach((t,i)=>{
+      const p = list[i];
+      const div=document.createElement("div");
+      div.className="product";
+      div.innerHTML=`
+        <img src="${p.img}" alt="${p.name}">
+        <h3>${p.name}</h3>
+        <p>${translations[lang].price}: ${p.price}</p>
+        <p>${p.comment}</p>
+        <button class="btn btn-cart" onclick="addToCart('${p.name}','${p.price}')">${translations[lang].addToCart}</button>
+        <a href="https://wa.me/22891962246?text=${translations[lang].discuss} ${p.name} - ${translations[lang].price}: ${p.price}" target="_blank">
+          <button class="btn btn-whatsapp">${translations[lang].whatsapp}</button>
+        </a>
+      `;
+      container.appendChild(div);
+      setTimeout(()=>div.classList.add("visible"),100*i);
+    });
+  }
+
+  function addToCart(name,price){
+    cart.push({name,price});
+    cartCount++;
+    document.getElementById("cartCount").textContent = cartCount;
+    // petite animation visuelle
+    document.getElementById("cartCount").style.animation="pop 0.3s ease";
+    setTimeout(()=>document.getElementById("cartCount").style.animation="",300);
+    alert(name+" ajouté au panier !");
+  }
+    
+
+  function sendCart(){
+    if(cart.length===0){ alert("Panier vide"); return; }
+    let msg="Bonjour, voici mon panier:\n";
+    cart.forEach(c=> msg+= "- "+c.name+" ("+c.price+")\n");
+    window.open("https://wa.me/22891962246?text="+encodeURIComponent(msg),"_blank");
+  }
+
+  function searchProduct(){
+    const val=document.getElementById("searchInput").value.toLowerCase();
+    const filtered=products.filter(p=>p.name.toLowerCase().includes(val));
+    renderProducts(filtered);
+  }
+
+  function toggleSearch(){
+    const bar = document.getElementById("searchBar");
+    bar.style.display = (bar.style.display === "none") ? "block" : "none";
+  }
+
+
+  // Initial render
+  renderProducts(products);
+</script>
+
+</body>
+</html>

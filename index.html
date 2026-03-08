@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chargement - PayPay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary:#60a71e;
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      font-family:'Poppins',sans-serif;
+      background:var(--primary); color:#fff;
+      display:flex; align-items:center; justify-content:center;
+      height:100vh; text-align:center;
+    }
+
+    #preloader {
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      width:100%; height:100%;
+      position:relative;
+    }
+
+    /* ✅ Cercle contenant le logo */
+    .logo-circle {
+      width:150px; height:150px;
+      border:5px solid #fff; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      animation:spin 3s linear infinite;
+      margin-bottom:20px;
+    }
+    .logo-circle img {
+      width:120px; height:120px;
+    }
+
+    /* ✅ Titre PAYPAY animé */
+    .title span {
+      display:inline-block; font-size:40px; font-weight:bold;
+      animation:bounce 1s infinite alternate;
+    }
+    .title span:nth-child(odd){ animation-delay:0.2s; }
+    .title span:nth-child(even){ animation-delay:0.4s; }
+
+    /* ✅ Icône commercial animé */
+    .loading-icon {
+      font-size:55px;
+      margin-top:15px;
+      animation:pulse 1s infinite;
+    }
+
+    /* ✅ Message en bas */
+    .bottom-message {
+      position:absolute; bottom:20px;
+      font-size:16px; font-weight:600;
+      animation:fadeIn 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes spin { from{transform:rotate(0);} to{transform:rotate(360deg);} }
+    @keyframes bounce { from{transform:translateY(0);} to{transform:translateY(-10px);} }
+    @keyframes pulse { 0%{opacity:0.5;} 50%{opacity:1;} 100%{opacity:0.5;} }
+    @keyframes fadeIn { from{opacity:0.3;} to{opacity:1;} }
+
+    /* ✅ Adaptation mobile */
+    @media (max-width:600px){
+      .title span { font-size:28px; }
+      .logo-circle { width:140px; height:140px; }
+      .logo-circle img { width:90px; height:90px; }
+      .loading-icon { font-size:40px; }
+      .bottom-message { font-size:12px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="preloader">
+  <!-- Logo dans un cercle tournant -->
+  <div class="logo-circle">
+    <img src="images/logo_vente.png" alt="Logo">
+  </div>
+
+  <!-- Titre PAYPAY -->
+  <h1 class="title"><span>P</span><span>A</span><span>Y</span><span>P</span><span>A</span><span>Y</span></h1>
+
+  <!-- Icône commercial animé -->
+  <div class="loading-icon"><i class="fas fa-shopping-bag"></i></div>
+
+  <!-- Message en bas -->
+  <p class="bottom-message">Commander vos pages e‑commerce dès maintenant</p>
+</div>
+
+<script>
+  // ✅ Après 4 secondes, redirige vers prince.html
+  setTimeout(()=>{
+    window.location.href="prise.html";
+  },4000);
+</script>
+
+</body>
+</html>
