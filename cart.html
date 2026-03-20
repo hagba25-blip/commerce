@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mon Panier</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- Font Awesome déjà inclus -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header>
+  <h1>Mon Panier</h1>
+  <!-- Icône Home -->
+  <div class="home-icon" onclick="window.location.href='prise.html'">
+    <i class="fas fa-home"></i>
+  </div>
+</header>
+
+<div id="cartItems"></div>
+<div id="cartTotal"></div>
+
+<button onclick="checkout()">Commander</button>
+
+<!-- Formulaire de livraison -->
+<div id="checkoutForm" style="display:none;">
+  <h2>Coordonnées de livraison</h2>
+  <form id="orderForm">
+    <label><i class="fas fa-user"></i> Nom complet:</label>
+    <input type="text" id="fullName" required><br>
+
+    <label><i class="fas fa-phone"></i> Téléphone:</label>
+    <input type="text" id="phone" required><br>
+
+    <label><i class="fas fa-city"></i> Ville:</label>
+    <input type="text" id="city" required><br>
+
+    <label><i class="fas fa-map-marker-alt"></i> Adresse:</label>
+    <input type="text" id="address" required><br>
+
+    <label><i class="fas fa-credit-card"></i> Mode de paiement:</label><br>
+    <input type="radio" name="payment" value="livraison" checked> Paiement à la livraison<br>
+    <input type="radio" name="payment" value="en ligne"> Paiement en ligne<br>
+
+    <!-- Badge de confirmation -->
+    <div id="successBadge" style="display:none;">
+      <i class="fas fa-check-circle"></i> <span>Commande envoyée !</span>
+    </div>
+
+
+    <button type="submit"><i class="fas fa-paper-plane"></i> Payer</button>
+  </form>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>

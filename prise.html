@@ -17,16 +17,17 @@
     <img src="images/logo_vente.png" alt="Logo">
   </div>
   <div style="display:flex; align-items:center; gap:20px;"> 
-    <div class="search-toggle" onclick="toggleSearch()"><i class="fas fa-search"></i>
-    </div>
+    <div class="search-toggle" onclick="toggleSearch()"><i class="fas fa-search"></i></div>
     <!-- Sélecteur de langue --> 
-     <select onchange="setLanguage(this.value)"> 
+    <select onchange="setLanguage(this.value)"> 
       <option value="fr">Français</option> 
       <option value="en">English</option> 
       <option value="ew">Eʋegbe</option> 
     </select>
 
-    <div class="cart-icon" onclick="sendCart()"><i class="fas fa-shopping-cart"></i>
+    <!-- Icône panier qui redirige vers cart.html -->
+    <div class="cart-icon" onclick="window.location.href='cart.html'">
+      <i class="fas fa-shopping-cart"></i>
       <span id="cartCount">0</span>
     </div>
   </div>
@@ -42,94 +43,12 @@
   <a href="https://wa.me/22891962246" target="_blank"><i class="fab fa-whatsapp"></i></a>
   <a href="mailto:sol.infotech10@gmail.com"><i class="fas fa-envelope"></i></a>
   <a href="https://www.facebook.com/marketplace/item/791895487276760/" target="_blank"><i class="fab fa-facebook"></i></a>
-  <a href="tiktok.com/@freenet.technolog" target="_blank"><i class="fab fa-tiktok"></i></a>
-  <a href="#" onclick="sendCart()"><i class="fas fa-shopping-cart"></i></a>
+  <a href="https://tiktok.com/@freenet.technolog" target="_blank"><i class="fab fa-tiktok"></i></a>
+  <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
 </footer>
 
 <script src="i18n.js"></script>
-<script>
- 
-  const products = [
-    {name:"faut plat", price:"200 FCFA", comment:" faut plat Super qualité", img:"images/assiete.jpg"},
-    {name:"CHISE PLASTIQUE", price:"2.500 FCFA", comment:"Très demandé", img:"images/chese1.jpg"},
-    {name:"FRIGIDAIRE DE GLACE", price:"60.000 FCFA", comment:"Nouveau", img:"images/frigidair.jpg"},
-    {name:"SOURIS SANS FILE", price:"1.500 FCFA", comment:"Promo spéciale", img:"images/sourisss.jpg"},
-    {name:"MONTER EN OR", price:"3.000 FCFA", comment:"montre en or trés attirant", img:"images/monmontre.jpg"},
-    {name:"HAUT PARLEUR PUBLICITAIRE", price:"12.000 FCFA", comment:"Édition limitée", img:"images/hoparleur.jpg"},
-    {name:"FRIGIDAIRE", price:"66.000 FCFA", comment:"Populaire", img:"images/frigidair&.jpg"},
-    {name:"TABLETTE", price:"20.000 FCFA", comment:"tablette enfant", img:"images/tablette.jpg"},
-    {name:"BATERIE ARTISTE", price:"100.000 FCFA", comment:"bateririe moderne aves base éclairante", img:"images/bateri.jpg"},
-    {name:"CHAISE", price:"2.000 FCFA", comment:"chaise plastique et sollide", img:"images/chese22.jpg"},
-    {name:"TENIS DE SPORT", price:"7.000 FCFA", comment:"tenis fermer pour la jeunesse", img:"images/chaussur.jpg"},
-    {name:"ORDINATEUR", price:"110.000 FCFA", comment:"pc de haut niveaux version avancé", img:"images/ordinateur.jpg"},
-    {name:"VENTILATEUR", price:"10.000 FCFA", comment:"ventilateur Super qualité", img:"images/ventilateur.jpg"},
-    {name:"BRASSEUR", price:"20.000 FCFA", comment:"brasseur Super qualité plafoner", img:"images/ventilateur_plafon.jpg"},
-    {name:"HAOJUE", price:"560.000 FCFA", comment:"haojue dame nouveau", img:"images/moto22.jpg"},
-    {name:"GITAR", price:"55.000 FCFA", comment:"gitar moderne le song moderne et éclatant", img:"images/gitar.jpg"},
-    {name:"FRIGIDAIRE DU SALON", price:"90.000 FCFA", comment:"frigidaire du salon bien décoré", img:"images/friji.jpg"},
-    {name:"CASQUE BLUETOOTH", price:"2.200 FCFA", comment:"casque bluetooth", img:"images/casque_audi.jpg"},
-    {name:"TSHIRT HOMME", price:"1.500 FCFA", comment:"tshirt de bonne qualiter", img:"images/habi_hom.jpg"},
-    {name:"TSHIRT HOMME", price:"1.500 FCFA", comment:"tshirt de bonne qualiter et couleur", img:"images/habi_hom2.jpg"}
-  ];
-
-  let cart = [];
-  let cartCount = 0;
-
-  function renderProducts(list, lang="fr"){
-    const container = document.getElementById("productList");
-    container.innerHTML="";
-    translations[lang].products.slice(0,20).forEach((t,i)=>{
-      const p = list[i];
-      const div=document.createElement("div");
-      div.className="product";
-      div.innerHTML=`
-        <img src="${p.img}" alt="${p.name}">
-        <h3>${p.name}</h3>
-        <p>${translations[lang].price}: ${p.price}</p>
-        <p>${p.comment}</p>
-        <button class="btn btn-cart" onclick="addToCart('${p.name}','${p.price}')">${translations[lang].addToCart}</button>
-        <a href="https://wa.me/22891962246?text=${translations[lang].discuss} ${p.name} - ${translations[lang].price}: ${p.price}" target="_blank">
-          <button class="btn btn-whatsapp">${translations[lang].whatsapp}</button>
-        </a>
-      `;
-      container.appendChild(div);
-      setTimeout(()=>div.classList.add("visible"),100*i);
-    });
-  }
-
-  function addToCart(name,price){
-    cart.push({name,price});
-    cartCount++;
-    document.getElementById("cartCount").textContent = cartCount;
-    // petite animation visuelle
-    document.getElementById("cartCount").style.animation="pop 0.3s ease";
-    setTimeout(()=>document.getElementById("cartCount").style.animation="",300);
-    alert(name+" ajouté au panier !");
-  }
-    
-
-  function sendCart(){
-    if(cart.length===0){ alert("Panier vide"); return; }
-    let msg="Bonjour, voici mon panier:\n";
-    cart.forEach(c=> msg+= "- "+c.name+" ("+c.price+")\n");
-    window.open("https://wa.me/22891962246?text="+encodeURIComponent(msg),"_blank");
-  }
-
-  function searchProduct(){
-    const val=document.getElementById("searchInput").value.toLowerCase();
-    const filtered=products.filter(p=>p.name.toLowerCase().includes(val));
-    renderProducts(filtered);
-  }
-
-  function toggleSearch(){
-    const bar = document.getElementById("searchBar");
-    bar.style.display = (bar.style.display === "none") ? "block" : "none";
-  }
-
-
-  // Initial render
-  renderProducts(products);
-</script>
+<script src="main.js"></script>
 
 </body>
 </html>
