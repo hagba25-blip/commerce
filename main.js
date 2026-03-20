@@ -137,6 +137,13 @@ document.addEventListener("DOMContentLoaded",()=>{
 
       // Envoi vers WhatsApp
       window.open("https://wa.me/22891962246?text="+encodeURIComponent(msg),"_blank");
+
+      // ✅ Afficher le badge de confirmation
+      const badge=document.getElementById("successBadge");
+      if(badge){
+        badge.style.display="block";
+        setTimeout(()=>{ badge.style.display="none"; },4000);
+      }
     });
   }
 
