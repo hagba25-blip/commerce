@@ -26,23 +26,37 @@
 
 <!-- Formulaire de livraison -->
 <div id="checkoutForm" style="display:none;">
+  <!-- ✅ Texte attractif -->
+  <p style="
+    background:#25D366;
+    color:#fff;
+    font-size:18px;
+    font-weight:700;
+    text-align:center;
+    padding:10px;
+    border-radius:8px;
+    margin-bottom:15px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  ">
+    🚚 Livraison gratuite partout à Lomé !
+  </p>
   <h2>Coordonnées de livraison</h2>
   <form id="orderForm">
     <label><i class="fas fa-user"></i> Nom complet:</label>
-    <input type="text" id="fullName" required><br>
+    <input type="text" id="fullName" placeholder="Ex: Hubert Kossi" required><br>
 
-    <label><i class="fas fa-phone"></i> Téléphone:</label>
-    <input type="text" id="phone" required><br>
+    <label><i class="fas fa-phone"></i> Téléphone:+228</label>
+    <input type="text" id="phone" placeholder="Ex: +22899315092" required><br>
 
     <label><i class="fas fa-city"></i> Ville:</label>
-    <input type="text" id="city" required><br>
+    <input type="text" id="city" placeholder="Ex: Lomé" required><br>
 
     <label><i class="fas fa-map-marker-alt"></i> Adresse:</label>
-    <input type="text" id="address" required><br>
+    <input type="text" id="address" placeholder="Ex: Quartier Sagbado, Rue 12" required><br>
 
     <label><i class="fas fa-credit-card"></i> Mode de paiement:</label><br>
     <input type="radio" name="payment" value="livraison" checked> Paiement à la livraison<br>
-    <input type="radio" name="payment" value="en ligne"> Paiement en ligne<br>
+    <input type="radio" name="payment" value="en ligne" disabled> Paiement en ligne(construction en cours)<br>
 
     <!-- Badge de confirmation -->
     <div id="successBadge" style="display:none;">
