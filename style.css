@@ -1,16 +1,17 @@
 :root {
-  --primary:#0077ff;
+  --primary:#0077ff;   /* couleur principale par défaut */
   --secondary:#25D366;
   --dark:#353339;
   --light:#e6e4ec;
 }
 
 /* ✅ Styles généraux */
-* { box-sizing:border-box; }
+* { box-sizing:border-box; margin:0; padding:0; }
 body {
   font-family:'Poppins',sans-serif;
   margin:0; padding:0;
-  background:var(--light); color:#090909b1;
+  background:var(--light); 
+  color:#090909b1;
 }
 
 /* ✅ Header */
@@ -62,38 +63,63 @@ header select:hover { background:var(--primary); color:#fff; }
   border:2px solid var(--primary); border-radius:30px;
   outline:none; transition:0.3s;
 }
-
-.search-bar input:focus { border-color:var(--secondary); }
-
 .search-bar input:focus { border-color:var(--secondary); }
 
 /* ✅ Produits */
 .products {
   display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:25px; padding:20px;
+  gap:25px; padding:20px; padding-top:100px;   /* espace pour header */ padding-bottom:100px; /* espace pour footer */
 }
 .product {
-  background:#b6aeae; border-radius:12px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  background:#fff; border-radius:12px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.12);
   padding:15px; text-align:center;
-  opacity:0; transform:translateY(20px);
-  transition:all 0.8s ease;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
-.product.visible { opacity:1; transform:translateY(0); }
-.product img { width:60%; height:180px; object-fit:cover; border-radius:20px; }
-.product h3 { margin:10px 0 5px; font-weight:600; }
-.product p { margin:5px 0; }
+.product:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+.product img { width:100%; height:230px; object-fit:cover; border-radius:12px; }
+.product h3 { margin:10px 0 5px; font-weight:600; font-size: 18px; color: #333;}
+.product p { margin:5px 0; color:red; font-weight: 500; }
+
+/* ✅ Bouton Ajouter au panier */
+button {
+  background: #28a745; /* vert moderne */
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* ✅ Effet au survol */
+button:hover {
+  background: #218838; /* vert plus foncé */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+}
+
+/* ✅ Effet au clic */
+button:active {
+  transform: scale(0.96);
+}
+
 
 /* ✅ Boutons */
 .btn {
   display:inline-block; margin:5px; padding:10px 16px;
   border:none; border-radius:30px; cursor:pointer;
-  color:#fff; font-weight:600; font-size:14px;
-  transition:0.3s; animation:pulse 1s infinite;
+  color:#1a01da; font-weight:600; font-size:14px;
+  transition:0.3s; animation:pulse 1.5s infinite;
 }
-.btn-cart { background:var(--primary); }
-.btn-whatsapp { background:var(--secondary); }
-.btn:hover { transform:scale(1.05); opacity:0.9; }
+.btn-cart, .btn-whatsapp { background:var(--secondary); }
+.btn:hover { transform:scale(1.08); opacity:0.95; }
 @keyframes pulse { 0%{transform:scale(1);} 50%{transform:scale(1.08);} 100%{transform:scale(1);} }
 
 /* ✅ Footer */
@@ -108,42 +134,151 @@ footer a {
 }
 footer a:hover { color:var(--primary); transform:scale(1.2); }
 
-/* ✅ Préloader */
-:root { --primary:#60a71e; }
+/* ✅ Préloader global */
 body.preloader {
-  background:var(--primary); color:#fff;
-  display:flex; align-items:center; justify-content:center;
-  height:100vh; text-align:center;
+  background: var(--secondary); /* bleu ciel */
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  text-align: center;
 }
+
+/* ✅ Conteneur principal */
 #preloader {
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  width:100%; height:100%; position:relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  position: relative;
 }
+
+/* ✅ Logo en cercle animé */
 .logo-circle {
-  width:150px; height:150px;
-  border:5px solid #fff; border-radius:50%;
-  display:flex; align-items:center; justify-content:center;
-  animation:spin 3s linear infinite;
-  margin-bottom:20px;
+  width: 160px;
+  height: 160px;
+  border: 6px solid #5d09e4;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: spin 3s linear infinite;
+  margin-bottom: 25px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.3);
 }
-.logo-circle img { width:120px; height:120px; }
+.logo-circle img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+/* ✅ Titre PAYPAY sous le logo */
+.title {
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
 .title span {
-  display:inline-block; font-size:40px; font-weight:bold;
-  animation:bounce 1s infinite alternate;
+  display: inline-block;
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  animation: bounce 1s infinite alternate;
 }
-.title span:nth-child(odd){ animation-delay:0.2s; }
-.title span:nth-child(even){ animation-delay:0.4s; }
+.title span:nth-child(odd) { animation-delay: 0.2s; }
+.title span:nth-child(even) { animation-delay: 0.4s; }
+
+/* ✅ Icône de chargement */
 .loading-icon {
-  font-size:55px; margin-top:15px;
-  animation:pulse 1s infinite;
+  font-size: 55px;
+  margin-top: 10px;
+  animation: pulse 1.2s infinite;
 }
+
+/* ✅ Message en bas du fond bleu */
 .bottom-message {
-  position:absolute; bottom:20px;
-  font-size:16px; font-weight:600;
-  animation:fadeIn 2s ease-in-out infinite alternate;
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%); /* centré horizontalement */
+  font-size: 16px;
+  font-weight: 600;
+  color: hsl(244, 93%, 48%);    /* texte blanc sur fond bleu */
+  opacity: 0.9;
+  animation: fadeIn 2s ease-in-out infinite alternate;
 }
-@keyframes spin { from{transform:rotate(0);} to{transform:rotate(360deg);} }
-@keyframes fadeIn { from{opacity:0.3;} to{opacity:1;} }
+
+/* ✅ Animations */
+@keyframes spin {
+  from { transform: rotate(0); }
+  to { transform: rotate(360deg); }
+}
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-8px); }
+}
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.7; }
+}
+@keyframes fadeIn {
+  from { opacity: 0.3; }
+  to { opacity: 1; }
+}
+
+/* ✅ Panier */
+#cartItems {
+  margin:100px auto 20px;
+  max-width:900px;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+.cart-item {
+  background:#fff;
+  color:#000;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  padding:15px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:15px;
+}
+.cart-item img {
+  border-radius:10px;
+  width:80px;
+  height:80px;
+  object-fit:cover;
+}
+.cart-item h3 {
+  flex:1;
+  font-size:16px;
+  font-weight:600;
+}
+.cart-item p {
+  margin:5px 0;
+  font-size:14px;
+}
+.cart-item button {
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  padding:6px 12px;
+  cursor:pointer;
+  transition:0.3s;
+}
+.cart-item button:hover {
+  background:var(--secondary);
+  transform:scale(1.05);
+}
 
 /* ✅ Adaptation mobile */
 @media (max-width:768px) {
@@ -169,129 +304,8 @@ body.preloader {
   .logo-circle { width:140px; height:140px; }
   .logo-circle img { width:90px; height:90px; }
   .loading-icon { font-size:40px; }
-  .bottom-message { font-size:12px; }
+  .bottom-message { font-size:12px;}
 }
-
-:root {
-      --primary:#60a71e;
-    }
-    * { box-sizing:border-box; margin:0; padding:0; }
-    body {
-      font-family:'Poppins',sans-serif;
-      background:var(--primary); color:#fff;
-      display:flex; align-items:center; justify-content:center;
-      height:100vh; text-align:center;
-    }
-
-    #preloader {
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
-      width:100%; height:100%;
-      position:relative;
-    }
-
-    /* ✅ Cercle contenant le logo */
-    .logo-circle {
-      width:150px; height:150px;
-      border:5px solid #fff; border-radius:50%;
-      display:flex; align-items:center; justify-content:center;
-      animation:spin 3s linear infinite;
-      margin-bottom:20px;
-    }
-    .logo-circle img {
-      width:120px; height:120px;
-    }
-
-    /* ✅ Titre PAYPAY animé */
-    .title span {
-      display:inline-block; font-size:40px; font-weight:bold;
-      animation:bounce 1s infinite alternate;
-    }
-    .title span:nth-child(odd){ animation-delay:0.2s; }
-    .title span:nth-child(even){ animation-delay:0.4s; }
-
-    /* ✅ Icône commercial animé */
-    .loading-icon {
-      font-size:55px;
-      margin-top:15px;
-      animation:pulse 1s infinite;
-    }
-
-    /* ✅ Message en bas */
-    .bottom-message {
-      position:absolute; bottom:20px;
-      font-size:16px; font-weight:600;
-      animation:fadeIn 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes spin { from{transform:rotate(0);} to{transform:rotate(360deg);} }
-    @keyframes bounce { from{transform:translateY(0);} to{transform:translateY(-10px);} }
-    @keyframes pulse { 0%{opacity:0.5;} 50%{opacity:1;} 100%{opacity:0.5;} }
-    @keyframes fadeIn { from{opacity:0.3;} to{opacity:1;} }
-
-    /* ✅ Adaptation mobile */
-    @media (max-width:600px){
-      .title span { font-size:28px; }
-      .logo-circle { width:140px; height:140px; }
-      .logo-circle img { width:90px; height:90px; }
-      .loading-icon { font-size:40px; }
-      .bottom-message { font-size:12px; }
-    }
-/* ✅ Styles du panier */
-#cartItems {
-  margin:100px auto 20px;
-  max-width:900px;
-  padding:20px;
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-}
-
-.cart-item {
-  background:#fff;
-  color:#000;
-  border-radius:12px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
-  padding:15px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  gap:15px;
-}
-
-.cart-item img {
-  border-radius:10px;
-  width:80px;
-  height:80px;
-  object-fit:cover;
-}
-
-.cart-item h3 {
-  flex:1;
-  font-size:16px;
-  font-weight:600;
-}
-
-.cart-item p {
-  margin:5px 0;
-  font-size:14px;
-}
-
-.cart-item button {
-  background:var(--primary);
-  color:#fff;
-  border:none;
-  border-radius:8px;
-  padding:6px 12px;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-.cart-item button:hover {
-  background:var(--secondary);
-  transform:scale(1.05);
-}
-
 /* ✅ Total panier */
 #cartTotal {
   font-size:18px;
